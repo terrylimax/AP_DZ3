@@ -53,7 +53,7 @@ app.dependency_overrides[get_optional_current_user] = override_optional_current_
 
 async def override_get_async_session_override():
     from sqlalchemy.ext.asyncio import async_sessionmaker
-    engine = create_async_engine(TEST_DATABASE_URL, echo=False)
+    engine = create_async_engine(TEST_DATABASE_URL, echo=True)
     async_session_maker = async_sessionmaker(engine, expire_on_commit=False)
     async with async_session_maker() as session:
          yield session
