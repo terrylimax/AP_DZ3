@@ -2,7 +2,7 @@ from math import e
 from os import replace
 from urllib import response
 from fastapi import FastAPI, APIRouter, HTTPException, Depends, Query
-from database import get_async_session
+from src.database import get_async_session
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi.responses import RedirectResponse
 from typing import Optional, List
@@ -115,7 +115,6 @@ async def search_links(
         
         if not links:
             raise HTTPException(status_code=404, detail="No records found with the provided original URL") 
-
         
         link_responses = [
             LinkResponse(
@@ -149,6 +148,9 @@ async def get_link_by_short_code(short_code: str, session: AsyncSession = Depend
             raise HTTPException(status_code=404, detail="Short code not found")
         
         return original_link_object
+    
+    except HTTPException as e:
+        raise e
     except Exception as e:
         raise HTTPException(status_code=500, detail={
             "status": "error",
@@ -196,6 +198,7 @@ async def redirect_to_original(
             redis_client.set(f"cached_link:{short_code}", json.dumps(data))
         
         return RedirectResponse(url=original_url) #type: ignore
+    
     except HTTPException as e:
         raise e
     except Exception as e:
@@ -221,6 +224,10 @@ async def delete_short_code(
         await redis_client.delete(f"cached_link:{short_code}")
         
         return {"status": "success"}
+    
+    except HTTPException as e:
+        raise e
+    
     except Exception as e:
         raise HTTPException(status_code=500, detail={
             "status": "error",
@@ -280,9 +287,6 @@ async def get_stats(
         "used_count": original_link_object.used_count,
         "last_used": original_link_object.last_used
     }
-    
-
-
 
 # Подключаем роутер к приложению
 app.include_router(router)

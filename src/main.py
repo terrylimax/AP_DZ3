@@ -19,7 +19,7 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
     await create_db_and_tables()
     await create_links_db_and_tables()
     yield
-    await redis.close()
+    await redis.aclose()
 
 
 app = FastAPI(lifespan=lifespan)

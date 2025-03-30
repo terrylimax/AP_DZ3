@@ -1,0 +1,15 @@
+# Игнорирование кэшированных файлов Python
+**/__pycache__/
+**/*.py[cod]
+.DS_Store
+.pytest_cache/
+
+# Игнорирование папок виртуальных окружений
+venv/
+env/
+.venv/
+
+.env
+
+/htmlcov
+.env

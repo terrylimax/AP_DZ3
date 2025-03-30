@@ -3,7 +3,9 @@ from sqlalchemy.orm import declarative_base
 from sqlalchemy import Column, Integer, DateTime, String, Boolean
 from datetime import datetime
 from sqlalchemy.dialects.postgresql import UUID
-from database import engine
+import test
+from src.database import engine
+import pytest
 
 Base = declarative_base()
 
@@ -22,3 +24,7 @@ class Link(Base):
 async def create_links_db_and_tables():
     async with engine.begin() as conn:
         await conn.run_sync(Link.metadata.create_all)
+        
+
+    
+        

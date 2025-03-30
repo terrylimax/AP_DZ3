@@ -13,3 +13,9 @@ fastapi-cache2
 email-validator-2.2.0
 python-dotenv
 psycopg2
+asyncpg
+flower
+pytest
+httpx
+coverage
+pytest-asyncio

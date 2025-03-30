@@ -2,6 +2,7 @@ import uuid
 from datetime import datetime
 from pydantic import BaseModel
 from typing import Optional
+
     
 class LinkCreate(BaseModel):
     # id записи не указывается, так как генерируется автоматически

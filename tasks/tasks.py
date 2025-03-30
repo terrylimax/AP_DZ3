@@ -2,8 +2,8 @@ import logging
 from celery import Celery
 from datetime import datetime
 from sqlalchemy import delete
-from links.models import Link
-from database import SyncSessionMaker
+from src.links.models import Link
+from src.database import SyncSessionMaker
 from fastapi import Depends
 import celeryconfig
 

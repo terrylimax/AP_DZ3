@@ -2,7 +2,7 @@ from fastapi import Depends
 from fastapi_users.db import SQLAlchemyBaseUserTableUUID, SQLAlchemyUserDatabase
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import DeclarativeBase
-from database import engine, get_async_session
+from src.database import engine, get_async_session
 
 
 class Base(DeclarativeBase):
